@@ -10,6 +10,10 @@ WHERE TAX_ID = '12494695465';
 -- check columns that are listen
 select * from cdc.captured_columns;
 
-select * from cdc.fn_cdc_get_all_changes_change_data_capture_test_PERSON(
-  0x0000002400000C880043, CAST(10000000000 AS BINARY(4)), ''
-)
+-- check changes
+DECLARE @from_lsn binary(10), @to_lsn binary(10)
+SET @from_lsn = sys.fn_cdc_get_min_lsn(N'change_data_capture_test_PERSON')
+SET @to_lsn   = sys.fn_cdc_get_max_lsn()
+SELECT @from_lsn,@to_lsn, N'all';
+SELECT * FROM cdc.fn_cdc_get_all_changes_change_data_capture_test_PERSON(@from_lsn, @to_lsn, N'all');
+GO
