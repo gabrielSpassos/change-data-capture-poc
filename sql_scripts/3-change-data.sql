@@ -11,7 +11,5 @@ WHERE TAX_ID = '12494695465';
 select * from cdc.captured_columns;
 
 select * from cdc.fn_cdc_get_all_changes_change_data_capture_test_PERSON(
-  0x0000002400000C880043,
-  CAST(10000000000 AS BINARY(4)),
-  ''
+  0x0000002400000C880043, CAST(10000000000 AS BINARY(4)), ''
 )
